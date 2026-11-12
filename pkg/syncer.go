@@ -77,7 +77,7 @@ func (n *NetworkConnectionReconciler) syncFolder(client *gowebdav.Client, ctx co
 		return
 	}
 
-	if ensureDirExists(localPath) != nil {
+	if err = ensureDirExists(localPath); err != nil {
 		return
 	}
 	localFileMap := make(map[string]string)
@@ -92,7 +92,7 @@ func (n *NetworkConnectionReconciler) syncFolder(client *gowebdav.Client, ctx co
 		log.Println("Checking file", remoteFilePath, localFilePath)
 		if file.IsDir() {
 			log.Println(remoteFilePath, "is a dir. Executing recursion...", localFilePath)
-			if ensureDirExists(localFilePath) != nil {
+			if err = ensureDirExists(localFilePath); err != nil {
 				return
 			}
 			var updatedFilesRec []string
