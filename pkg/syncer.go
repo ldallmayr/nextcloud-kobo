@@ -39,12 +39,12 @@ func (n *NetworkConnectionReconciler) sync(ctx context.Context) {
 		nUpdatedFiles += len(files)
 	}
 	if nUpdatedFiles > 0 {
+		n.rescanBooks()
 		n.toastsChan <- fmt.Sprintf("Synced %d files:\n%s", nUpdatedFiles, generateFilesString(filesMap))
 	} else {
 		log.Println("No files updated")
 	}
-	log.Println("Sync successful")
-	n.rescanBooks()
+	log.Println("Sync finished")
 }
 
 func (n *NetworkConnectionReconciler) syncRemotes(ctx context.Context) (updatedFiles map[string][]string, err error) {

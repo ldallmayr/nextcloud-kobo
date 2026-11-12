@@ -137,7 +137,7 @@ func (n *NetworkConnectionReconciler) dispatchMessages(ctx context.Context) {
 
 func (n *NetworkConnectionReconciler) rescanBooks() {
 	obj := n.conn.Object("com.github.shermp.nickeldbus", "/nickeldbus")
-	call := obj.Call("com.github.shermp.nickeldbus.pfmRescanBooks", 0)
+	call := obj.Call("com.github.shermp.nickeldbus.pfmRescanBooksFull", 0)
 	if call.Err != nil {
 		log.Println("Failed to rescan books", call.Err)
 	}
